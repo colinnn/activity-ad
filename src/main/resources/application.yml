@@ -1,0 +1,58 @@
+spring:
+  profiles:
+    active: local
+    #connection pool
+    tomcat:
+      min-idle: 10
+      initial-size: 10
+      max-idle: 50
+      max-active: 10000
+  #jpa
+  jpa:
+    show-sql: true
+server:
+  port: 9086
+  tomcat:
+    max-threads: 800
+    uri-encoding: UTF-8
+    pool:
+      max-active: 8
+      max-idle: 8
+      min-idle: 0
+      max-wait: -1
+---
+#local DB Configuration:
+spring:
+  profiles: local
+  datasource:
+    luckdraw:
+      url: jdbc:mysql://localhost:3306/test
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: 1234
+    game:
+      url: jdbc:mysql://localhost:3306/game
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: 1234
+#redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+---
+#online DB Configuration:
+spring:
+  profiles: online
+  datasource:
+#redis
+  redis:
+    host: redis1.server
+    port: 6379
+server:
+  tomcat:
+    basedir: log/
+debug: true
+logging:
+  level: debug
+
+
